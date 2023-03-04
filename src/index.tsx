@@ -4,16 +4,23 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
+// 이 영역이 추가됩니다. ------
+import { legacy_createStore as createStore } from "redux";
+import { Provider } from "react-redux";
+import rootReducer from './reducers';
+const store = createStore(rootReducer);
+// ----------------------------
+
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
+
 root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
+  <Provider store={store}>  {/* Provider로 감싸고, 만든 store을 적용 */}
+    <React.StrictMode>
+      <App />
+    </React.StrictMode>
+  </Provider>
 );
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();
